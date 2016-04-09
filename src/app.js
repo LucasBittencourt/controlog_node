@@ -4,7 +4,7 @@
  var bodyParser = require("body-parser");
  var mongoose = require('mongoose');
  
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://controlog:controlog123@ds057234.mlab.com:57234/controlog');//username:password@host:port/database
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://heroku_6rb00m7m:eh96fkhhk0qb2tsb0daf27ibl6@ds019980.mlab.com:19980/heroku_6rb00m7m');//username:password@host:port/database
  
 var router = require('./controlog/router');
 var loger = require('./loger');
