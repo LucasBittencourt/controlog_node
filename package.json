@@ -1,0 +1,24 @@
+{
+  "name": "controlog_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://betomdk@bitbucket.org/betomdk/controlog_node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/betomdk/controlog_node#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "express-validator": "^2.20.3",
+    "mongoose": "^4.4.8",
+    "node-sha1": "^1.0.1"
+  }
+}
