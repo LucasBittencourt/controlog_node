@@ -4,7 +4,7 @@
  var bodyParser = require("body-parser");
  var mongoose = require('mongoose');
  
-mongoose.connect('mongodb://controlog:controlog123@ds057234.mlab.com:57234/controlog');//username:password@host:port/database
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://controlog:controlog123@ds057234.mlab.com:57234/controlog');//username:password@host:port/database
  
 var router = require('./controlog/router');
 var loger = require('./loger');
@@ -15,6 +15,6 @@ app.use(bodyParser.json())
 app.use(loger);
 app.use(router);
  
- app.listen(8000, function(){
+ app.listen(process.env.PORT || 8000, function(){
   console.log('App online...');
  });

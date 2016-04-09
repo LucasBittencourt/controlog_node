@@ -12,10 +12,6 @@ var ApplicationSchema = new Schema({
 	    required: [true, 'Nome deve ser preenchido'],
 	    type: String,
 	  	default: ''
-	  },
-	  ativo:{
-		type: Boolean,
-		default: true
 	  }
 });
 
@@ -29,10 +25,6 @@ var TypelogSchema = new Schema({
 	    required: [true, 'Nome deve ser preenchido'],
 	    type: String,
 	  	default: ''
-	  },
-	  ativo:{
-		  type: Boolean,
-		  default: true
 	  }
 });
 
