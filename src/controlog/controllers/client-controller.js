@@ -7,7 +7,7 @@ exports.insertClient = function(request, response){
 	new module.Client(request.body).save(function(error, data){
 		if(error){
 		    	console.log(error);
-		    	response.status(400).json(error.errors);
+		    	response.status(400).json({errors: error.errors});
 		} else {
 		    	response.status(201).json(data);
 		}
@@ -31,7 +31,7 @@ exports.editClient = function(request, response){
 	module.Client.update({_id:request.body._id}, request.body ,function(error, data){
 		  
 		if(error){
-		   	response.status(400).json(error.errors);
+		   	response.status(400).json({errors: error.errors});
 		} else {
 		   	response.status(201).json(data);
 		}
