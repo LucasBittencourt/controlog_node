@@ -10,7 +10,7 @@ router.get('/v1/clients/:clientId/application/', controllerApp.listApplication);
 //Rotas de Log
 var controllerLog = require('./controllers/log-controller');
 router.get('/v1/clients/:clientId/application/:appId/events?', controllerLog.listLog);
-router.post('/v1/clients/log/add', controllerLog.insertLog);
+router.post('/v1/clients/:clientId/log/add', controllerLog.insertLog);
 
 //Rotas de Tipo de Log
 var controllerTypeLog = require('./controllers/type-log-controller');

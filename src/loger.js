@@ -1,5 +1,4 @@
 var loger = function(req,res,next){
-
 	next();
 }
 
