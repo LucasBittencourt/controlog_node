@@ -24,5 +24,6 @@ var controllerClient = require('./controllers/client-controller');
 router.post('/v1/clients/add', controllerClient.insertClient);
 router.put('/v1/clients/edit', controllerClient.editClient);
 router.post('/v1/clients/login', controllerClient.loginClient);
+router.post('/v1/clients/recoverPassword', controllerClient.recoverPassword);
 
 module.exports = router;
