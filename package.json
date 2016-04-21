@@ -14,6 +14,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/betomdk/controlog_node#readme",
   "dependencies": {
+    "basic-auth": "^1.0.3",
     "body-parser": "^1.15.0",
     "cors": "^2.7.1",
     "express": "^4.13.4",
