@@ -7,7 +7,6 @@ exports.insertClient = function(request, response){
 	}
 	new module.Client(request.body).save(function(error, data){
 		if(error){
-		    	console.log(error);
 		    	response.status(400).json(error);
 		} else {
 		    	response.status(201).json(data);
@@ -40,16 +39,11 @@ exports.editClient = function(request, response){
 	}); 
 }
 
-exports.recoverPassword = function(request, response){	
-	console.log(request.body);
-	
+exports.recoverPassword = function(request, response){			
 	if (request.body.index == 0){
 		if (request.body.email == '') {
 			response.status(201).json({result:false, message:'email em branco'});
-			console.log('=[ 1');
-		} else {			
-			console.log('=] 1');
-			
+		} else {					
 			module.Client.find({ email: request.body.email }, function(error, data){
 				if(error || data.length ==0){
 					response.status(201).json({result: false, message:'email inválido'});
@@ -70,28 +64,32 @@ exports.recoverPassword = function(request, response){
 				}
 			}); 		
 		}
-	} else if (request.index == 2){
-/*
-		var recover
-		
-		module.Client.find({ document: request.document }, function(error, data){
-			if(error || data.length ==0){
-				recover.status(201).json({result: false});
-			} else {
-				recover.status(201).json(data);
+	} else if (request.body.index == 2){
+		if (request.pwd == '' || request.pwdConfirm == '') {
+			response.status(201).json({result:false, message:'Preencha os campos de senha'});
+		} else if (request.pwd != request.pwdConfirm) {
+			response.status(201).json({result:false, message:'Senhas divergentes'});
+		} else {
+			request.body.pwd = sha1(request.body.pwd);
 				
-				recover.password = sha1(request.body.pwd)
-				
-				module.Client.update({_id:request.body._id}, recover.body ,function(error, data){
-		  
-				if(error){
-					response.status(400).json(error);
-				} else {
-					response.status(201).json(data);
-				}				
+			if (request.body.id) {
+				module.Client.update({ _id: request.body.id}, {$set:{password: request.body.pwd}},function(error, data){
+					if(error){
+						response.status(400).json(error);
+					} else {					
+						response.status(201).json({result: true, message:'Senha alterado com sucesso'});
+					}
+				});
+			} else  {
+				module.Client.update({ email: request.body.email, document: request.body.document}, {$set:{password: request.body.pwd}},function(error, data){
+					if(error){
+						response.status(400).json(error);
+					} else {					
+						response.status(201).json({result: true, message:'Senha alterado com sucesso'});
+					}
+				}); 		
 			}
-		});		
-*/
+		}
 	}
 }
 
