@@ -2,7 +2,7 @@ var moduleLog = require('../models/log-schema');
 var moduleClient = require('../models/client-schema');
 
 exports.insertLog = function(request, response){
-	
+ 
 	moduleClient.Client.findOne({ _id:request.params.clientId} ,{applications:{$elemMatch:{code : request.body.application.code}},types_log:{$elemMatch:{code : request.body.type_log.code}}}, function(error, data){
 		  
 		   if(error || data.length ==0){
@@ -27,12 +27,12 @@ exports.insertLog = function(request, response){
 		    	}
 		    	
 		    }
-	 });
+	 }); 
  }
 
 exports.listLog = function(request, response){	
-	
-	  var query = module.Log.find({client_id:request.params.clientId , application_id:request.params.appId });
+	 
+	 var query =  moduleLog.Log.find({client_id:request.params.clientId , application_id:request.params.appId });
 	  
 	  if(request.query){
 		  if(request.query.typeLog){
@@ -45,9 +45,13 @@ exports.listLog = function(request, response){
 			  query.where('date_time').lte(request.query.dateEnd);
 		  }
 	  }
-	 
-	  query.exec(function(err, usuarios){
-		  response.status(200).json(usuarios);
+	
+	  query.exec(function(err, logs){
+		  if(err){
+		    	response.status(400).json(err);
+		    } else {
+		    	response.status(201).json(logs);
+		    }
 	  });
 	  
 	 
