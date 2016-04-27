@@ -32,7 +32,7 @@ exports.insertLog = function(request, response){
 
 exports.listLog = function(request, response){	
 	 
-	 var query =  moduleLog.Log.find({client_id:request.params.clientId , application_id:request.params.appId });
+	 var query = moduleLog.Log.find({'application._id' :  request.params.appId} );
 	  
 	  if(request.query){
 		  if(request.query.typeLog){
