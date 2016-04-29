@@ -9,7 +9,7 @@ var loger = function(req,res,next){
 		next();
 	}
 	if(user){
-		console.log(user);
+		//console.log(user);
 		if (req.originalUrl.search( /\/log\/add/g ) != -1) {
 			user.pass = sha1(user.pass);
 		}

@@ -33,16 +33,15 @@ exports.insertLog = function(request, response){
 exports.listLog = function(request, response){	
 	 
 	 var query = moduleLog.Log.find({'application._id' :  request.params.appId} );
-	  
-	  if(request.query){
-		  if(request.query.typeLog){
-			  query.where('type_log').equals(request.query.typeLog);
+	  if(request.body){
+		  if(request.body.typeLog){
+			  query.where('type_log._id').equals(request.body.typeLog);
 		  }
-		  if(request.query.dateStart){
-			  query.where('date_time').gte(request.query.dateStart);
+		  if(request.body.dateStart){
+			  query.where('date_time').gte(request.body.dateStart);
 		  }
-		  if(request.query.dateEnd){
-			  query.where('date_time').lte(request.query.dateEnd);
+		  if(request.body.dateEnd){
+			  query.where('date_time').lte(request.body.dateEnd);
 		  }
 	  }
 	
@@ -50,6 +49,7 @@ exports.listLog = function(request, response){
 		  if(err){
 		    	response.status(400).json(err);
 		    } else {
+		    	console.log(logs);
 		    	response.status(201).json(logs);
 		    }
 	  });
