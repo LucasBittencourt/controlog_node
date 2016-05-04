@@ -9,6 +9,8 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://heroku_6rb00m7m:eh96fkhhk
 var router = require('./controlog/router');
 var loger = require('./loger');
 
+app.use(express.static('public'));
+app.use('/public', express.static('public'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
