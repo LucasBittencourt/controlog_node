@@ -7,22 +7,22 @@ var loger = function(req,res,next){
  //TODO hack para passar sem autenticar. Remover isso
 	if(req.originalUrl.search( /\/clients\/login/g ) != -1 || req.originalUrl.search( /\/clients\/add/g ) != -1){
 		next();
-	}
-	if(user){
-		//console.log(user);
-		if (req.originalUrl.search( /\/log\/add/g ) != -1) {
-			user.pass = sha1(user.pass);
-		}
-		module.Client.find({ email: user.name, password: user.pass }, function(error, data){
-			if(error || data.length ==0){
-				res.status(500).send('Autenticação Inválida!');
-			} else {
-				next();
-			}
-		});
 	}else{
-		res.status(500).send('Autenticação Inválida!');
-	} 
+		if(user){
+			if (req.originalUrl.search( /\/log\/add/g ) != -1) {
+				user.pass = sha1(user.pass);
+			}
+			module.Client.find({ email: user.name, password: user.pass }, function(error, data){
+				if(error || data.length ==0){
+					res.status(500).send('Autenticação Inválida!');
+				} else {
+					next();
+				}
+			});
+		}else{
+			res.status(500).send('Autenticação Inválida!');
+		} 
+	}
 }
 
 module.exports = loger;
